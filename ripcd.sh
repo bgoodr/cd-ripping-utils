@@ -189,7 +189,7 @@ sed -i \
 
 cat $tmp_config_file
 
-# Hack around a bug where the comment does not show up in Rhythmbox:
+# Hack around a bug (https://abcde.einval.com/bugzilla/show_bug.cgi?id=34) where the comment does not show up in Rhythmbox:
 #
 #    The "eng:c0:" part was reverse engineered from editing the comment
 #    field in Rhythmbox and then running eyeD3 on the resulting .mp3 file:
