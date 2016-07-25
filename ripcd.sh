@@ -200,7 +200,13 @@ cat $orig_abcde | sed 's%COMMENTOUTPUT:+--comment=::%COMMENTOUTPUT:+--comment=en
 chmod a+x $tmp_abcde
 diff -u $orig_abcde $tmp_abcde
 
+set pipefail
 time $tmp_abcde -c $tmp_config_file | tee $tmp_log
+exit_code=$?
+if [ $exit_code != 0 ]
+then
+  exit $exit_code
+fi
 
 # Copy the script and the log into the directories being produced. Scrape the directories from the log:
 sed -n '/^movetrack/s%^.*track[0-9]*\.[a-zA-Z0-9]* %%gp' < $tmp_log | sed 's,^\(.*\)/\([^/]*\)$,\1,g' | sort | uniq | while read destination_dir
